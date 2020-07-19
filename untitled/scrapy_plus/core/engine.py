@@ -16,19 +16,14 @@ from scrapy_plus.conf.settings import SPIDERS, PIPELINES, SPIDER_MIDDLEWARES, DO
 
 class Engine(object):
 
-    def __init__(self,spiders,piplines=[],spider_mids=[],downloader_mids=[]):
-        self.spiders = self._auto_import_instances(SPIDERS,isspider=True)
-        self.scheduler = Scheduler()
-        self.downloader = Downloader()
-        self.pipeline = Pipeline()
+    def __init__(self):
+        self.spiders = self._auto_import_instances(SPIDERS,isspider=True)   # 接收爬虫字典
+        self.scheduler = Scheduler()    # 初始化调度器对象
+        self.downloader = Downloader()    # 初始化下载器对象
 
-        # self.spider_mid = SpiderMiddleware()
-        # self.downloader_mid = DownloaderMiddleware()
-
-        self.pipelines=piplines
-
-        self.spider_mids = spider_mids
-        self.downloader_mids = downloader_mids
+        self.pipelines = self._auto_import_instances(PIPELINES) # 管道
+        self.spider_mids = self._auto_import_instances(SPIDER_MIDDLEWARES) # 爬虫中间件
+        self.downloader_mids = self._auto_import_instances(DOWNLOADER_MIDDLEWARES) # 下载中间件
 
         self.total_request_nums = 0
         self.total_response_nums = 0
