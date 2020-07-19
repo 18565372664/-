@@ -11,6 +11,7 @@ from .scheduler import Scheduler
 from scrapy_plus.middlewares.spider_midddlewares import SpiderMiddleware
 from scrapy_plus.middlewares.downloader_middlewares import DownloaderMiddleware
 
+from multiprocessing.dummy import Pool
 import importlib
 from scrapy_plus.conf.settings import SPIDERS, PIPELINES, SPIDER_MIDDLEWARES, DOWNLOADER_MIDDLEWARES
 
@@ -100,7 +101,8 @@ class Engine(object):
             # getattr(类, 类中方法名的字符串) = 类方法对象
             for result in parse(response):
                 if isinstance(result,Request):
-                    result = self.spider_mid.process_request(result)
+                    for spider_mid in self.spider_mids:
+                        result = spider_mid.process_request(result)
                     result.spider_name = request.spider_name
                     self.scheduler.add_request(result)
                 else:

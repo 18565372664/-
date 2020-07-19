@@ -53,7 +53,6 @@ class Scheduler(object):
         data = request.data if request.data is not None else {}
         data = sorted(data.items(), key=lambda x: x[0])  # 用sorted()方法 按data字典的key进行排序
         # items()返回元祖 key参数表示按什么进行排序 x表示data.items() x[0]表示元祖第一个值,也就是data的键
-
         # 4. 利用sha1计算获取指纹
         s1 = sha1()
         s1.update(self._to_bytes(url))  # sha1计算的对象必须是字节类型
