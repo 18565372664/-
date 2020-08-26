@@ -1,0 +1,14 @@
+setup.py
+flcp/__init__.py
+flcp/debug.py
+flcp/items.py
+flcp/middlewares.py
+flcp/pipelines.py
+flcp/settings.py
+flcp/spiders/__init__.py
+flcp/spiders/facaimeng.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
